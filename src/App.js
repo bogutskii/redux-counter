@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+
+    const deleteButtonHandler = (id) => {
+        props.deleteCounter(id)
+    }
+
+    return (
+        <div className="App">
+
+            {props.counters.map(el=>
+                <p>{el.number}
+                    <button onClick={() => deleteButtonHandler(el.id)}> delete</button>
+                </p>
+            )}
+
+        </div>
+    );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    counters: state.counters,
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    deleteCounter: (counterId) => dispatch({
+        type: 'DELETE',
+        payload: {counterId:counterId}
+    })
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
