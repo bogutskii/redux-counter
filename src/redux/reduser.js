@@ -11,10 +11,12 @@ const counter = (state = initialState, action) => {
         case 'DELETE':
             const newCounters = state.counters.filter(el=>
                 el.id !==action.payload.counterId)
-
             return {...state, counters: newCounters}
 
-
+        case 'ADD_COUNTER':
+            return {
+                ...state, counters: [...state.counters, {number: action.payload.number, id: action.payload.id}]
+            }
 
         default:
             return state
