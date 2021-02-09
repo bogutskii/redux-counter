@@ -18,9 +18,9 @@ function App(props) {
 
             {props.counters.map(el =>
                 <p>
-                    <button onClick={() => minus(el.id)}> -1</button>
+                    <button onClick={() => plusMinusButtonHandler(el.id,-1)}> -1</button>
                     {el.number}
-                    <button> +1</button>
+                    <button onClick={() => plusMinusButtonHandler(el.id,1)}> +1</button>
                     &nbsp;
                     <button onClick={() => deleteButtonHandler(el.id)}>delete</button>
                 </p>
