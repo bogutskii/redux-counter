@@ -3,7 +3,11 @@ const initialState = {
         {id: 1, number: 10},
         {id: 2, number: 20},
         {id: 3, number: 30}
-    ]
+    ],
+    modals: {
+        modalsIsOpen: false
+    }
+
 }
 
 const counter = (state = initialState, action) => {
@@ -18,7 +22,10 @@ const counter = (state = initialState, action) => {
                 ...state, counters: [...state.counters, {number: action.payload.number, id: action.payload.id}]
             }
         case 'MATH_ACTION':
-            const updatedCounters = state.counters.map(el=> el.id===action.payload.id ? {...el,number: el.number + action.payload.value}:el)
+            const updatedCounters = state.counters.map(el => el.id === action.payload.id ? {
+                ...el,
+                number: el.number + action.payload.value
+            } : el)
             return {...state, counters: updatedCounters}
 
         default:

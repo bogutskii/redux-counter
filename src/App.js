@@ -1,7 +1,11 @@
 import './App.css';
 import {connect} from 'react-redux'
+import  ModalWindow from './ModalWindow/ModalWindow'
 
 function App(props) {
+
+    const { modal} = props
+
 
     const deleteButtonHandler = (id) => {
         props.deleteCounter(id)
@@ -23,6 +27,7 @@ function App(props) {
                     <button onClick={() => plusMinusButtonHandler(el.id,1)}> +1</button>
                     &nbsp;
                     <button onClick={() => deleteButtonHandler(el.id)}>delete</button>
+                    {modal.modalIsOpen && ModalWindow}
                 </p>
             )}
             <button onClick={() => addButtonCounter(100, Math.random() * Math.random())}>add counter</button>
