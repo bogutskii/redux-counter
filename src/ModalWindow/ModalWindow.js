@@ -11,7 +11,7 @@ function ModalWindow(props) {
 
     return (
         <div>
-            <Modal isOpen={modal.createModal}>
+            <Modal isOpen={modal.modalsIsOpen}>
                 <ModalBody>
                     <h2>Create new counter</h2>
                 </ModalBody>
@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch) => ({
             value: value
         }
     }),
-    addCounter: (value, id) => dispatch({
+     addCounter: (value, id) => dispatch({
         type: 'ADD_COUNTER', payload: {
             name: +value,
             id: id,
