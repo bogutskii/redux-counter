@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {connect} from 'react-redux'
 import {Input, Button, Modal, ModalBody, ModalFooter} from 'reactstrap';
-
+import { v4 as uuidv4 } from 'uuid'
 
 function ModalWindow(props) {
 
@@ -27,6 +27,10 @@ function ModalWindow(props) {
                         outline color="secondary"
                     >Save</Button>
                     <Button
+                        onClick={() => addCounter(newCounter, uuidv4(), changeCreateModal(false))}
+                        outline color="secondary"
+                    >Save and close</Button>
+                    <Button
                         onClick={() => changeCreateModal(false)} color="earning"
                     >Cancel</Button>
                 </ModalFooter>
@@ -41,13 +45,15 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     changeCreateModal: (value) => dispatch({
-        type: 'CHANGE_CREATE_MODAL', payload: {
-            value: value
+        type: 'CHANGE_CREATE_MODAL',
+        payload: {
+            value: value,
         }
     }),
      addCounter: (value, id) => dispatch({
-        type: 'ADD_COUNTER', payload: {
-            name: +value,
+        type: 'ADD_COUNTER',
+         payload: {
+            number: +value,
             id: id,
         }
     })

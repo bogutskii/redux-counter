@@ -1,12 +1,13 @@
 import './App.css';
 import React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import {connect} from 'react-redux'
-
+import 'bootstrap/dist/css/bootstrap.css'
 import ModalWindow from './ModalWindow/ModalWindow'
 
 function App(props) {
 
-    const {modal, changeCreatModal} = props
+    const {modal, changeCreateModal} = props
 
 
     const deleteButtonHandler = (id) => {
@@ -23,6 +24,7 @@ function App(props) {
         <div className="App">
 
             {props.counters.map(el =>
+                <div key={uuidv4()}>
                 <p>
                     <button onClick={() => plusMinusButtonHandler(el.id, -1)}> -1</button>
                     {el.number}
@@ -31,16 +33,17 @@ function App(props) {
                     <button onClick={() => deleteButtonHandler(el.id)}>delete</button>
                     {modal.modalsIsOpen && <ModalWindow/>}
                 </p>
+                </div>
             )}
-            <button onClick={() => addButtonCounter(100, Math.random() * Math.random())}>add counter</button>
-            <button onClick={() => changeCreatModal(true)}>add redux count</button>
+            <button onClick={() => addButtonCounter(100, uuidv4())}>add counter</button>
+            <button onClick={() => changeCreateModal(true)}>add redux count</button>
         </div>
     );
 }
 
 const mapStateToProps = (state) => ({
     counters: state.counters,
-
+    modal: state.modals,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -58,8 +61,8 @@ const mapDispatchToProps = (dispatch) => ({
             id: id, value: value
         }
     }),
-    changeCreatModal: (value) => dispatch({
-        type: 'CHANG_CREAT_MODAL',
+    changeCreateModal: (value) => dispatch({
+        type: 'CHANGE_CREATE_MODAL',
         payload: {
             value: value
         }

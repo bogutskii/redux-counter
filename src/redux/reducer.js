@@ -27,7 +27,7 @@ const counter = (state = initialState, action) => {
                 number: el.number + action.payload.value
             } : el)
             return {...state, counters: updatedCounters}
-        case 'CHANG_CREAT_MODAL':
+        case 'CHANGE_CREATE_MODAL':
             return {
                 ...state, modals: {...state.modals, modalsIsOpen: action.payload.value}
             }
